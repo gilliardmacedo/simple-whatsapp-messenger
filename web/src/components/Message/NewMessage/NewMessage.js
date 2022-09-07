@@ -1,3 +1,5 @@
+import { Flex } from '@chakra-ui/react'
+
 import { navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
@@ -31,15 +33,9 @@ const NewMessage = () => {
   }
 
   return (
-    <div className="rw-segment">
-      <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">New Message</h2>
-      </header>
-
-      <div className="rw-segment-main">
-        <MessageForm onSave={onSave} loading={loading} error={error} />
-      </div>
-    </div>
+    <Flex justify="center">
+      <MessageForm onSave={onSave} loading={loading} error={error} />
+    </Flex>
   )
 }
 

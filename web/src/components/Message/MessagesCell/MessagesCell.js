@@ -1,6 +1,7 @@
 import { Link, routes } from '@redwoodjs/router'
 
 import Messages from 'src/components/Message/Messages'
+import LoadingContent from 'src/components/shared/LoadingContent'
 
 export const QUERY = gql`
   query FindMessages {
@@ -13,7 +14,7 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => <LoadingContent />
 
 export const Empty = () => {
   return (

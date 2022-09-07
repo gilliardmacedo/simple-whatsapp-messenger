@@ -1,11 +1,8 @@
-import {
-  Form,
-  FormError,
-  FieldError,
-  Label,
-  TextField,
-  Submit,
-} from '@redwoodjs/forms'
+import { EmailIcon, PhoneIcon } from '@chakra-ui/icons'
+import { FormControl, FormLabel, Button, Flex } from '@chakra-ui/react'
+import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
+
+import { Form, Submit, TextField } from '@redwoodjs/forms'
 
 const MessageForm = (props) => {
   const onSubmit = (data) => {
@@ -13,58 +10,39 @@ const MessageForm = (props) => {
   }
 
   return (
-    <div className="rw-form-wrapper">
+    <Flex>
       <Form onSubmit={onSubmit} error={props.error}>
-        <FormError
-          error={props.error}
-          wrapperClassName="rw-form-error-wrapper"
-          titleClassName="rw-form-error-title"
-          listClassName="rw-form-error-list"
-        />
+        <FormControl isRequired>
+          <FormLabel htmlFor="message">Message</FormLabel>
+          <Input as={TextField} name="message" />
+        </FormControl>
 
-        <Label
-          name="message"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Message
-        </Label>
+        <FormControl isRequired>
+          <FormLabel htmlFor="destination">
+            Phone to (with country and area code)
+          </FormLabel>
+          <InputGroup>
+            <InputLeftElement pointerEvents="none">
+              <PhoneIcon color="gray.300" />
+            </InputLeftElement>
+            <Input
+              as={TextField}
+              type="tel"
+              placeholder="558899999999"
+              name="destination"
+            />
+          </InputGroup>
+        </FormControl>
 
-        <TextField
-          name="message"
-          defaultValue={props.message?.message}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-
-        <FieldError name="message" className="rw-field-error" />
-
-        <Label
-          name="destination"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Destination
-        </Label>
-
-        <TextField
-          name="destination"
-          defaultValue={props.message?.destination}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-
-        <FieldError name="destination" className="rw-field-error" />
-
-        <div className="rw-button-group">
-          <Submit disabled={props.loading} className="rw-button rw-button-blue">
-            Save
+        <Flex paddingTop="50px" justify="center">
+          <Submit disabled={props.loading}>
+            <Button leftIcon={<EmailIcon />} colorScheme="blue">
+              Send Message
+            </Button>
           </Submit>
-        </div>
+        </Flex>
       </Form>
-    </div>
+    </Flex>
   )
 }
 
